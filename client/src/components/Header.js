@@ -1,9 +1,21 @@
+/**
+ * React
+ */
 import React from 'react';
+
+/**
+ * React Router Dom
+ */
 import { withRouter, Link } from 'react-router-dom';
 
+/**
+ * Axios
+ */
 import axios from 'axios';
 
-
+/**
+ * Header Component
+ */
 class Header extends React.Component{
 
     constructor(props){

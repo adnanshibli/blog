@@ -1,18 +1,31 @@
-
+/**
+ * Express Module
+ */
 const express = require('express');
 
+/**
+ * Express Router
+ */
 const router = express.Router();
 
-
+/**
+ * Http Errors
+ */
 const createError = require('http-errors');
 
-
+/**
+ * JsonWebToken
+ */
 const jwt = require('jsonwebtoken');
 
-
+/**
+ * Passport
+ */
 const passport = require('passport');
 
-
+/**
+ * UserLogin
+ */
 router.post('/', (req, res, next) => {
     passport.authenticate('local', {session: false}, (err, user, info) => {
         if(err || !user) return next(createError(401));
@@ -29,7 +42,9 @@ router.post('/', (req, res, next) => {
     })(req, res);
 });
 
-
+/**
+ * User Details
+ */
 router.get('/me', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     res.json(req.user);
 });

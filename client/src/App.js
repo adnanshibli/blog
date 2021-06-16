@@ -1,20 +1,61 @@
+/**
+ * React
+ */
 import React, { Component } from 'react';
 
+/**
+ * React Router Dom
+ */
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+/**
+ * Application CSS
+ */
 import './App.css';
+
+/**
+ * Header
+ */
 import Header from './components/Header';
+
+/**
+ * Home Page
+ */
 import Home from './components/Home';
 
+/**
+ * Login Page
+ */
 import Login from './components/Login';
+
+/**
+ * Register Page
+ */
 import Register from './components/Register';
 
+/**
+ * Create Post Page
+ */
 import CreatePost from './components/CreatePost';
+
+/**
+ * View Post Page
+ */
 import ViewPost from './components/ViewPost';
 
+/**
+ * Edit Post Page
+ */
 import EditPost from './components/EditPost';
 
+/**
+ * Axios
+ */
 import axios from 'axios';
+
+/**
+ * App Component
+ */
 class App extends Component {
   constructor(props){
     super(props);
@@ -43,4 +84,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

@@ -1,11 +1,6 @@
-
 const createError = require('http-errors');
-
 const jwt = require('jsonwebtoken');
-
 const User = require('../models/user');
-
-
 exports.authenticated  = (req, res, next) => {
     let token = req.headers['authorization'];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {

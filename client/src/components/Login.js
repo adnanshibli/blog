@@ -1,7 +1,16 @@
+/**
+ * React
+ */
 import React from 'react';
 
+/**
+ * Axios
+ */
 import axios from 'axios';
 
+/**
+ * Login Component
+ */
 class Login extends React.Component{
 
     constructor(props){
@@ -52,9 +61,11 @@ class Login extends React.Component{
             });
         })
     }
+
     renderError(){
         return this.state.error ? (<blockquote>{this.state.error}</blockquote>) : "";
     }
+
     render(){
         return(
             <div className="column column-50 column-offset-25">
@@ -72,7 +83,5 @@ class Login extends React.Component{
         );
     }
 }
-
-
 
 export default Login

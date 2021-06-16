@@ -1,7 +1,6 @@
+
 const Post = require('../models/post');
 const createError = require('http-errors');
-
-
 exports.create = (req, res, next) => {
     let model = new Post({
         title: req.body.title,
@@ -35,7 +34,6 @@ exports.details = (req, res, next) => {
     })
     .catch(next);
 };
-
 exports.update = (req, res, next) => {
     let postId = req.params.id;
     let data = {

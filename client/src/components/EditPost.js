@@ -1,6 +1,18 @@
+/**
+ * React
+ */
 import React from 'react';
+
+/**
+ * Axios
+ */
 import axios from 'axios';
+
+/**
+ * EditPost Component
+ */
 class EditPost extends React.Component{
+
     constructor(props){
         super(props);
         if(!localStorage.getItem('token')){
@@ -17,18 +29,21 @@ class EditPost extends React.Component{
             error: ''
         };
     }
+
     onChangeTitle(e){
         this.setState({
             title: e.target.value,
             error: ''
         });
     }
+
     onChangeContent(e){
         this.setState({
             content: e.target.value,
             error: ''
         });
     }
+
     onSubmit(e){
         e.preventDefault();
         let data = {
@@ -45,6 +60,7 @@ class EditPost extends React.Component{
             });
         })
     }
+
     componentDidMount(){
         axios.get('/api/posts/'+this.props.match.params.id)
         .then(res => {
@@ -56,6 +72,7 @@ class EditPost extends React.Component{
             })
         })
     }
+
     renderError(){
         return this.state.error ? (<blockquote>{this.state.error}</blockquote>) : "";
     }

@@ -1,7 +1,9 @@
+
 const createError = require('http-errors');
 
 const jwt = require('jsonwebtoken');
- User = require('../models/user');
+
+const User = require('../models/user');
 
 exports.login = (req, res, next) => {
     User.findOne({email: req.body.email, password: req.body.password})

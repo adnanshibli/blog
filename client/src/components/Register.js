@@ -1,5 +1,16 @@
+/**
+ * React
+ */
 import React from 'react';
+
+/**
+ * Axios
+ */
 import axios from 'axios';
+
+/**
+ * Register Component
+ */
 class Register extends React.Component{
 
     constructor(props){
@@ -25,18 +36,21 @@ class Register extends React.Component{
             error: ''
         });
     }
+
     onChangeEmail(e){
         this.setState({
             email: e.target.value,
             error: ''
         });
     }
+
     onChangePassword(e){
         this.setState({
             password: e.target.value,
             error: ''
         });
     }
+
     onSubmit(e){
         e.preventDefault();
         let data = {
@@ -81,4 +95,5 @@ class Register extends React.Component{
         );
     }
 }
+
 export default Register

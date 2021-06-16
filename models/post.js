@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
+
 const CommentSchema = new Schema({
     content: {
         type: String,
@@ -18,6 +19,7 @@ const CommentSchema = new Schema({
         default: Date.now
     }
 });
+
 
 const PostSchema = new Schema({
     title: {
@@ -41,5 +43,7 @@ const PostSchema = new Schema({
     }
 });
 
+
 const Post = mongoose.model('Post', PostSchema);
+
 module.exports = Post;

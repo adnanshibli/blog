@@ -1,7 +1,23 @@
+/**
+ * React
+ */
 import React from 'react';
+
+/**
+ * Axios
+ */
 import axios from 'axios';
+
+/**
+ * React Router Dom
+*/
 import { Link } from 'react-router-dom';
+
+/**
+ * Home Component
+ */
 class Home extends React.Component{
+
     constructor(props){
         super(props);
         this.state = {
@@ -10,6 +26,7 @@ class Home extends React.Component{
             isLoading: true
         };
     }
+
     componentDidMount(){
         this.fetchPosts();
     }
@@ -30,6 +47,7 @@ class Home extends React.Component{
             });
         });
     }
+
     render(){
         if(this.state.isLoading){
             return(<h4>الرجاء الإنتظار</h4>);

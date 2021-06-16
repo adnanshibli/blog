@@ -1,6 +1,16 @@
+/**
+ * React
+ */
 import React from 'react';
 
+/**
+ * Axios
+ */
 import axios from 'axios';
+
+/**
+ * CreatePost Component
+ */
 class CreatePost extends React.Component{
 
     constructor(props){
@@ -17,18 +27,21 @@ class CreatePost extends React.Component{
             error: ''
         };
     }
+
     onChangeTitle(e){
         this.setState({
             title: e.target.value,
             error: ''
         });
     }
+
     onChangeContent(e){
         this.setState({
             content: e.target.value,
             error: ''
         });
     }
+
     onSubmit(e){
         e.preventDefault();
         let data = {
@@ -45,9 +58,11 @@ class CreatePost extends React.Component{
             });
         })
     }
+
     renderError(){
         return this.state.error ? (<blockquote>{this.state.error}</blockquote>) : "";
     }
+
     render(){
         return(
             <div className="column column-50 column-offset-25">
@@ -65,4 +80,5 @@ class CreatePost extends React.Component{
         );
     }
 }
+
 export default CreatePost

@@ -1,6 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 const createError = require('http-errors');
+
 exports.authenticated = (req, res, next) => {
     let token = req.headers['authorization'];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -13,6 +14,7 @@ exports.authenticated = (req, res, next) => {
         next();
     });
 };
+
 exports.guest = (req, res, next) => {
     let token = req.headers['authorization'];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {

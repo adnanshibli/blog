@@ -1,9 +1,21 @@
+/**
+ * React
+ */
 import React from 'react';
 
+/**
+ * Axios
+ */
 import axios from 'axios';
 
+/**
+ * React Router Dom
+*/
 import { Link } from 'react-router-dom';
 
+/**
+ * ViewPost Component
+ */
 class ViewPost extends React.Component{
 
     constructor(props){
@@ -25,6 +37,7 @@ class ViewPost extends React.Component{
             commentError: ''
         });
     }
+
     onSubmit(e){
         e.preventDefault();
         let data = { content: this.state.comment };
@@ -48,12 +61,14 @@ class ViewPost extends React.Component{
             });
         });
     }
+
     deletePost(){
         axios.delete("/api/posts/"+this.state.post._id)
         .then(res => {
             this.props.history.push('/');
         })
     }
+
     componentDidMount(){
         let postId = this.props.match.params.id;
         axios.get('/api/posts/'+postId)
@@ -82,6 +97,7 @@ class ViewPost extends React.Component{
             );
         }
     }
+
     renderComments(){
         let comments = <p>لايوجد تعليقات.</p>;
         if(this.state.post.comments.length){
@@ -115,6 +131,7 @@ class ViewPost extends React.Component{
             </div>
         );
     }
+
     render(){
         if(this.state.error){
             return(<blockquote>{this.state.error}</blockquote>);
@@ -135,5 +152,7 @@ class ViewPost extends React.Component{
             </div>
         );
     }
+
 }
+
 export default ViewPost

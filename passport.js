@@ -7,10 +7,12 @@ const passport = require('passport');
 
 const passportJWT = require("passport-jwt");
 
+
 const ExtractJWT = passportJWT.ExtractJwt;
 
 
 const JWTStrategy   = passportJWT.Strategy;
+
 
 const LocalStrategy = require('passport-local').Strategy;
  
@@ -29,6 +31,7 @@ passport.use(new LocalStrategy({
         .catch(err => cb(err));
     }
 ));
+
 
 passport.use(new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),

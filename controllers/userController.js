@@ -11,7 +11,6 @@ exports.create = (req, res, next) => {
     })
     .catch(next);
 };
-
 exports.list = (req, res, next) => {
     User.find()
     .then(users => {
