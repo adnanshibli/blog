@@ -1,10 +1,8 @@
 
 const jwt = require('jsonwebtoken');
 
-//الخطا
 const createError = require('http-errors');
 
-//الصلاحيات
 exports.authenticated = (req, res, next) => {
     let token = req.headers['authorization'];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
@@ -18,7 +16,6 @@ exports.authenticated = (req, res, next) => {
     });
 };
 
-//موظف زائر
 exports.guest = (req, res, next) => {
     let token = req.headers['authorization'];
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {

@@ -33,7 +33,6 @@ exports.list = (req, res, next) => {
 };
 
 
-//عرض تفاصيل المدونه من خلال ال id
 
 exports.details = (req, res, next) => {
     let postId = req.params.id;
@@ -48,7 +47,6 @@ exports.details = (req, res, next) => {
 };
 
 
-//تعديل ع المدونة
 exports.updates = (req, res, next) => {
     let postId = req.params.id;
 
@@ -68,7 +66,6 @@ exports.updates = (req, res, next) => {
 };
 
 
-//حذف المدونة
 exports.deletes = (req, res, next) => {
     let postId = req.params.id;
 

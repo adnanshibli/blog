@@ -9,7 +9,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 
 
-//دخول المستخدم
 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email, password: req.body.password })
@@ -28,7 +27,6 @@ exports.login = (req, res, next) => {
         })
         .catch(next);
 };
-//تفاصيل المستخدم
 
 exports.me = (req, res, next) => {
     res.json(req.user);

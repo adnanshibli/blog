@@ -10,7 +10,7 @@ var logger = require('morgan');
 
 const createError = require('http-errors');
 
-const mongoose = require("mongoose");//انتبه لازم اضيف اخر اشي تحت 
+const mongoose = require("mongoose"); 
 
 
 
@@ -36,7 +36,7 @@ app.use('/api/register', registerRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/posts', postRouter);
 app.use('/api/comments', commentsRouter);
-//تصحيح الخطا
+
 
 app.use((req, res, next) => next(createError(404)));
 
@@ -47,7 +47,6 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).json({ message: err.message || "some error occurred." });
 });
 
-//الاتصال مع الداتا بيز
 mongoose.connect(process.env.DB_Url, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
     if (err) throw err;
     console.log('connected successfully to server');
