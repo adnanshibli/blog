@@ -1,84 +1,117 @@
-/**
- * React
- */
 import React from 'react';
 
-/**
- * Axios
- */
 import axios from 'axios';
 
-/**
- * CreatePost Component
- */
-class CreatePost extends React.Component{
+const createError = require('http-errors');
 
-    constructor(props){
+class CreatePost extends React.Component {
+
+    constructor(props) {
+
         super(props);
-        if(!localStorage.getItem('token')){
-            this.props.history.push('/login');
+        if (!localStorage.getItem('token')) {
+            this.props.history.push('/Login');//move to home page
         }
+
         this.onChangeTitle = this.onChangeTitle.bind(this);
         this.onChangeContent = this.onChangeContent.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.renderError = this.renderError.bind(this);
+
         this.state = {
+
             title: '',
             content: '',
             error: ''
+
         };
     }
 
-    onChangeTitle(e){
+
+
+    onChangeTitle(e) {
+
         this.setState({
+
             title: e.target.value,
             error: ''
         });
     }
 
-    onChangeContent(e){
+    onChangeContent(e) {
+
         this.setState({
+
             content: e.target.value,
             error: ''
         });
     }
 
-    onSubmit(e){
+
+    onSubmit(e) {
+
         e.preventDefault();
+
         let data = {
+
             title: this.state.title,
+
             content: this.state.content
+
         };
+
         axios.post('/api/posts', data)
-        .then(res => {
-            this.props.history.push('/');
-        })
-        .catch(err => {
-            this.setState({
-                error: err.response.data.message
-            });
-        })
+
+            .then(res => {
+
+                //alert(res.data.token);
+                this.props.history.push('/');//move to home page
+
+            })
+
+            .catch(err => {
+                if (err.title === ' ' && err.content === ' ') throw createError(404);
+                //alert(err.response.data.message)
+                this.setState({
+                    error: err.response.data.message
+                });
+            })
     }
 
-    renderError(){
+
+    renderError() {
+
         return this.state.error ? (<blockquote>{this.state.error}</blockquote>) : "";
+
     }
 
-    render(){
-        return(
-            <div className="column column-50 column-offset-25">
-                <h4>إنشاء تدوينة</h4>
-                <hr/>
+    render() {
+
+
+        return (
+
+
+            <div className="column column-50 offset-25">
+
+
+                <h4> انشاء التدوينة</h4>
+
+                <hr />
+
                 {this.renderError()}
+
+
                 <form onSubmit={this.onSubmit}>
-                    <label>العنوان</label>
+                    <label> العنوان</label>
                     <input type="text" value={this.state.title} onChange={this.onChangeTitle} />
-                    <label>المحتوى</label>
+                    <label> المحتوى</label>
                     <textarea value={this.state.content} onChange={this.onChangeContent}></textarea>
-                    <input className="button-primary" type="submit" value="إنشاء التدوينة" />
+                    <input className="button-primary" type="submit" value=" انشاء التدوينة" />
                 </form>
             </div>
         );
     }
 }
 
-export default CreatePost
+
+export default CreatePost;

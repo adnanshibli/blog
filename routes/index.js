@@ -1,16 +1,7 @@
-/**
- * Express Module
- */
 var express = require('express');
-
-/**
- * Express Router
- */
 var router = express.Router();
 
-/**
- * Main page
- */
+/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });

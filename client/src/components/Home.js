@@ -1,25 +1,16 @@
-/**
- * React
- */
+
 import React from 'react';
 
-/**
- * Axios
- */
+
 import axios from 'axios';
 
-/**
- * React Router Dom
-*/
 import { Link } from 'react-router-dom';
 
-/**
- * Home Component
- */
-class Home extends React.Component{
+class Home extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
+
         this.state = {
             posts: [],
             error: '',
@@ -27,53 +18,68 @@ class Home extends React.Component{
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
+
         this.fetchPosts();
+
     }
 
-    fetchPosts(){
+    fetchPosts() {
         axios.get('/api/posts')
-        .then(res => {
-            this.setState({
-                posts: res.data,
-                error: '',
-                isLoading: false
-            });
-        })
-        .catch(err => {
-            this.setState({
-                error: err.response.data.message,
-                isLoading: false
-            });
-        });
+
+            .then(res => {
+
+                this.setState({
+                    posts: res.data,
+                    error: '',
+                    isLoading: false
+                });
+            })
+
+            .catch(err => {
+
+                //alert(err.response.data.message)
+                this.setState({
+                    error: err?.response?.data?.message,
+                    isLoading: false
+                });
+            })
+
     }
 
-    render(){
-        if(this.state.isLoading){
-            return(<h4>الرجاء الإنتظار</h4>);
+    render() {
+        if (this.state.isLoading) {
+            return (<h4>الرجاء الإنتظار</h4>);
         }
-        if(this.state.error){
-            return(<blockquote>{this.state.error}</blockquote>);
+        if (this.state.error) {
+            return (<blockquote>{this.state.error}</blockquote>);
         }
-        if(this.state.posts.length < 1){
-            return(<h4>لايوجد تدوينات</h4>);
+        if (this.state.posts.length < 1) {
+            return (<h4>لايوجد تدوينات</h4>);
         }
-        return this.state.posts.map(post => {
+        return (this.state.posts.map(post => {
             return (
                 <div key={post._id} className="row">
                     <div className="column">
+
                         <h4>{post.title}</h4>
-                        <h6 className="title">{post.author.name}</h6>
-                        <p>{post.content.substr(0,120)}</p>
-                        <Link to={"/post/view/"+post._id}>
-                            <button className="button-primary button-outline">إقرأ المزيد</button>
+
+                        <h6 className="title">{post?.author?.name}</h6>
+
+                        <p>{post.content.substr(0, 120)}</p>
+
+                        <Link to={'/post/view/' + post._id}>
+                            <button className="button-primary button-outline">افرأ المزيد</button>
                         </Link>
-                        <hr/>
+
+                        <hr />
                     </div>
                 </div>
             )
+
         })
+        )
     }
 }
 
-export default Home
+export default Home;

@@ -1,41 +1,138 @@
-/**
- * Express Module
- */
-const express = require('express');
+var express = require('express');
 
-/**
- * Express Router
- */
-const router = express.Router();
 
-/**
- * User Controller
- */
-const controller = require('../controllers/userController')
+var router = express.Router();
 
-/**
- * Create User
- */
-router.post('/', controller.create);
 
-/**
- * Users List
- */
-router.get('/', controller.list);
+const User = require('../models/user');
 
-/**
- * Show User
- */
-router.get('/:id', controller.show);
 
-/**
- * Update User
- */
-router.put('/:id', controller.update);
 
-/**
- * Delete User
- */
-router.delete('/:id', controller.delete);
+
+
+router.post('/', (req, res, next) => {
+
+  User.create({
+
+    name: req.body.name,
+
+    email: req.body.email,
+
+    password: req.body.password
+
+  })
+
+    .then(user => {
+
+      res.json(user);
+
+    })
+
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+
+});
+
+
+
+router.get('/', (req, res, next) => {
+
+  User.find()//find all users
+
+    .then(users => {
+
+      res.json(users);
+
+    })
+
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+});
+
+
+router.get('/:id', (req, res, next) => {
+
+  User.findById(req.params.id)//find using id
+
+    .then(user => {
+
+      res.json(user);
+
+    })
+
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+});
+
+
+
+router.get('/:email,password', (req, res, next) => {
+
+  //User.findById(req.params.id)//find using id
+  User.findOne({ email: req.body.email, password: req.body.password })//find by email and password
+
+    .then(user => {
+
+      res.json(user);
+
+    })
+
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+});
+
+
+router.put('/:id', (req, res, next) => {//update data of user 
+  let data = {
+    name: req.body.name,
+
+    email: req.body.email,
+
+    password: req.body.password
+  }
+
+  User.findByIdAndUpdate(req.params.id, data)
+
+    .then(updateuser => {
+
+      if (!updateuser) return res.status(404).send()
+      res.json(updateuser)
+    })
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+});
+
+
+router.delete('/:id', (req, res, next) => {//delete user 
+  User.findByIdAndRemove(req.params.id)
+    .then(deleteuser => {
+
+      if (!deleteuser) return res.status(404).send()
+      res.json({ message: "user is deleted" })
+    })
+
+    .catch(err => {
+
+      res.status(422).send(err);
+
+    });
+});
+
+
 
 module.exports = router;
