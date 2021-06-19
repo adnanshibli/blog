@@ -1,65 +1,47 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
-import axios from "axios"
 
-class Header extends React.Component {
+import React from 'react';
 
-    constructor(props) {
 
+import { withRouter, Link } from 'react-router-dom';
+
+
+import axios from 'axios';
+class Header extends React.Component{
+
+    constructor(props){
         super(props);
         this.logout = this.logout.bind(this);
     }
 
-
-    logout() {
+    logout(){
         localStorage.removeItem('token');
-        localStorage.removeItem('id');
-        axios.defaults.headers.common = { 'Authorization': '' };
-        this.props.history.push('/');//move to home page
+        localStorage.removeItem('_id');
+        axios.defaults.headers.common = {'Authorization': ''};
+        this.props.history.push('/');
     }
 
-
-
-    render() {
-
-
-        if (localStorage.getItem('token')) {
-            return (
-
+    render(){
+        if(localStorage.getItem('token')){
+            return(
                 <div className="navbar">
-
                     <ul>
-
-                        <li><Link to="/"> الصفحة الرئيسية </Link></li>
-
-                        <li><Link to="/post/create"> انشاء تدوينة </Link></li>
-
+                        <li><Link to="/">الرئيسية</Link></li>
+                        <li><Link to="/post/create">إنشاء تدوينة</Link></li>
                         <li><a href="#logout" onClick={this.logout}>تسجيل الخروج</a></li>
-
                     </ul>
-
                 </div>
-
-            )
+            );
         }
-        return (
+        return(
             <div className="navbar">
-
                 <ul>
-                    <li><Link to="/"> الصفحة الرئيسية </Link></li>
-
-                    <li><Link to="/Login"> تسجيل الدخول </Link></li>
-
-                    <li><Link to="/Register"> التسجيل  </Link></li>
-
+                    <li><Link to="/">الرئيسية</Link></li>
+                    <li><Link to="/login">تسجيل الدخول</Link></li>
+                    <li><Link to="/register">التسجيل</Link></li>
                 </ul>
-
             </div>
         );
     }
-
 }
 
-
-
-export default withRouter(Header);
+export default withRouter(Header)
