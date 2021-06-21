@@ -8,4 +8,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 router.post('/', authMiddleware.guest, controller.register);
 
+
+
 module.exports = router;
